@@ -119,8 +119,12 @@ class UDMessagesView: UIViewController, UITextViewDelegate, UIImagePickerControl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSLayoutConstraint.activate([viewForTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)])
-        
+        if #available(iOS 11.0, *) {
+            NSLayoutConstraint.activate([viewForTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)])
+        } else {
+            NSLayoutConstraint.activate([viewForTable.topAnchor.constraint(equalTo: view.topAnchor)])
+        }
+
         configurationStyle = usedesk?.configurationStyle ?? ConfigurationStyle()
         
         loader.alpha = 1
