@@ -216,8 +216,12 @@ class UDStartViewController: UIViewController, UITextFieldDelegate {
         usedesk.connectBlock = { bool in
             print("Connect = ", bool)
         }
+        usedesk.releaseChat()
+        usedesk.newMessageWithGUIBlock = { message in
+            print("New message")
+        }
         
-        usedesk.start(withCompanyID: companyIdTextField.text ?? "", chanelId: chanelIdTextField.text ?? "", urlAPI: urlBaseTextField.text, knowledgeBaseID: knowledgeBaseID, api_token: apiTokenTextField.text ?? "", email: emailTextField.text ?? "", phone: phoneTextField.text, url: urlTextField.text ?? "", urlToSendFile: urlToSendFileTextField.text ?? "", port: portTextField.text!, name: nameTextField.text, operatorName: operatorNameTextField.text, nameChat: nameChat, firstMessage: firstMessageTextField.text, note: noteTextField.text, additionalFields: additionalFields(), additionalNestedFields: additionalNestedFields(), additional_id: additionalIdTextField.text, token: tokenTextField.text, localeIdentifier: localeIdTextField.text, presentIn: self, isPresentDefaultControllers: !isTabBarSwitch.isOn, connectionStatus: { success, feedbackStatus, token in
+        usedesk.start(withCompanyID: companyIdTextField.text ?? "", chanelId: chanelIdTextField.text ?? "", urlAPI: urlBaseTextField.text, knowledgeBaseID: "1590", api_token: "6cfa9a25a5d927af6d617f59b6328d9bcaf55ae0", email: emailTextField.text ?? "", phone: phoneTextField.text, url: urlTextField.text ?? "", urlToSendFile: urlToSendFileTextField.text ?? "", port: portTextField.text!, name: nameTextField.text, operatorName: operatorNameTextField.text, nameChat: nameChat, firstMessage: firstMessageTextField.text, note: noteTextField.text, additionalFields: additionalFields(), additionalNestedFields: additionalNestedFields(), additional_id: additionalIdTextField.text, token: tokenTextField.text, localeIdentifier: localeIdTextField.text, presentIn: self, isPresentDefaultControllers: !isTabBarSwitch.isOn, connectionStatus: { success, feedbackStatus, token in
             if self.isTabBarSwitch.isOn && success {
                 let chatVC = self.usedesk.chatViewController() ?? UIViewController()
                 let firstVC = ViewController()
@@ -230,11 +234,10 @@ class UDStartViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }, errorStatus: {  _, _ in})
-        
+
         usedesk.presentationCompletionBlock = {
             print("close SDK")
         }
-        
     }
 }
 class ViewController: UIViewController {
