@@ -111,7 +111,6 @@ class UDStartViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-
     }
 
     @objc func keyboardWillHide(notification: Notification) {
