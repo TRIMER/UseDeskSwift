@@ -301,8 +301,15 @@ class UDBaseSectionsView: UIViewController, UITableViewDelegate, UITableViewData
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: usedesk!.model.stringFor("Cancel"), style: .plain, target: self, action: #selector(self.cancelSearchAction))
         navigationItem.rightBarButtonItem?.tintColor = configurationStyle.baseStyle.searchCancelButtonColor
-        let widthCancel = usedesk!.model.stringFor("Cancel").size(attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)], usesFontLeading: true).width + 8
-        searchBar.frame = CGRect(x: 8, y: 0, width: navigationView.frame.width - 38 - widthCancel, height: navigationView.frame.height)
+        var searchBarWidth: CGFloat
+        if #available(iOS 11.0, *) {
+            let widthCancel = usedesk!.model.stringFor("Cancel").size(attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 17)], usesFontLeading: true).width + 8
+            searchBarWidth = navigationView.frame.width - 38 - widthCancel
+        } else {
+            searchBar.searchBarStyle = .minimal
+            searchBarWidth = navigationView.frame.width - 8
+        }
+        searchBar.frame = CGRect(x: 8, y: 0, width: searchBarWidth, height: navigationView.frame.height)
         navigationView.addSubview(searchBar)
         searchBar.becomeFirstResponder()
     }
