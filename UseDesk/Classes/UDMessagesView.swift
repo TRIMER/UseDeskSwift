@@ -1562,6 +1562,10 @@ extension UDMessagesView: UICollectionViewDelegate, UICollectionViewDataSource, 
 }
 // MARK: - UIDocumentPickerDelegate
 extension UDMessagesView: UIDocumentPickerDelegate {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        self.documentPicker(controller, didPickDocumentsAt: [url])
+    }
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         if urls.count > 0 {
             addDraftMessage(with: urls[0])

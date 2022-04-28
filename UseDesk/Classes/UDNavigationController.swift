@@ -42,6 +42,11 @@ class UDNavigationController: UINavigationController {
             navigationController?.navigationBar.scrollEdgeAppearance = appearance
         } else {
             navigationController?.navigationBar.isTranslucent = false
+            if #available(iOS 11.0, *) {
+                
+            } else {
+                navigationBar.isTranslucent = false
+            }
             navigationBar.barTintColor = configurationStyle.navigationBarStyle.backgroundColor
             navigationBar.tintColor = configurationStyle.navigationBarStyle.textColor
         }
