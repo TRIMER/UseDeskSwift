@@ -56,12 +56,16 @@ class UDBaseCategoriesCell: UITableViewCell {
         countArticlesLabelWC.constant = width
         countArticlesLabelTC.constant = baseCategoriesStyle.countArticlesMargin.right
 
-        descriptionLabel.text = category.descriptionCategory.udRemoveSubstrings(with: ["<[^>]+>", "&nbsp;"])
+        let descriptionLabelText = category.descriptionCategory.udRemoveSubstrings(with: ["<[^>]+>", "&nbsp;"])
+        descriptionLabel.text = descriptionLabelText
         descriptionLabel.font = baseCategoriesStyle.descriptionFont
         descriptionLabel.textColor = baseCategoriesStyle.descriptionColor
         descriptionLabelLC.constant = baseCategoriesStyle.descriptionMargin.left
         descriptionLabelTC.constant = baseCategoriesStyle.descriptionMargin.right
         descriptionLabelBC.constant = baseCategoriesStyle.descriptionMargin.bottom        
+        if descriptionLabelText.isEmpty {
+            labelTextBC.constant = 0
+        }
         
         arrowImageView.image = baseCategoriesStyle.arrowImage
         arrowImageWC.constant = baseCategoriesStyle.arrowSize.width
